@@ -26,5 +26,24 @@ public class LoginTest extends TestBase {
         softAssert.assertAll();
     }
 
+    @Test
+    public void InputOfAnUnregisteredUser() {
+        SoftAssert softAssert = new SoftAssert();
+
+        LoginPage.loginWithCredentials(driver, "katyakarpukhina31@gmail.com", "123111");
+        softAssert.assertTrue(LoginPage.errorMessageIsDisplayed(driver), "Error message is not displayed");
+        softAssert.assertEquals(LoginPage.getErrorMessageText(driver), "Wrong password or the account is disabled, or does not exist");
+        softAssert.assertAll();
+    }
+
+    @Test
+    public void RegisteredUserInput() {
+        SoftAssert softAssert = new SoftAssert();
+
+        LoginPage.loginWithCredentials(driver, "kattta@tut.by", "123123");
+        softAssert.assertTrue(LoginPage.successMessageIsDisplayed(driver), "Success message is not displayed");
+        softAssert.assertEquals(LoginPage.getSuccessMessageText(driver), "You are now logged in as Katya Karpukhina.");
+        softAssert.assertAll();
+    }
 
 }

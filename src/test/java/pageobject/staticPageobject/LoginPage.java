@@ -17,7 +17,7 @@ public class LoginPage {
     private static By addToCartButton = By.cssSelector("[name='add_cart_product'][type='submit']");
     private static By cartQuantityLabelLocator = By.cssSelector("span[class='quantity']");
     private static By cartLink = By.cssSelector("[src='/includes/templates/default.catalog/images/cart.png']");
-
+    private static By successMessageLabel = By.cssSelector(".notice.success");
 
     public static void typeEmail(WebDriver driver, String email) {
 
@@ -65,6 +65,11 @@ public class LoginPage {
     public static void clickCart(WebDriver driver) {
         driver.findElement(cartLink).click();
     }
-
+    public static boolean successMessageIsDisplayed(WebDriver driver) {
+        return driver.findElement(successMessageLabel).isDisplayed();
+    }
+    public static String getSuccessMessageText(WebDriver driver) {
+        return driver.findElement(successMessageLabel).getText();
+    }
 
 }
